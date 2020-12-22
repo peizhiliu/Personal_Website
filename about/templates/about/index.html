@@ -1,0 +1,67 @@
+{% extends "base.html"%}
+{% load static %}
+
+
+{% block title %}
+<title>Peizhi Liu About</title>
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'about/css/index.css' %}">
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'about/js/index.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div id="content_container">
+    <div id="pic_and_greeting_container">
+        <div id="pic_and_greeting">
+            <img src="{{picture.url}}", alt="Profile Picture">
+            <pre>{{greeting}}</pre>
+        </div>
+        <div id="go_down">
+            <a href="#about_content">&#10093</a>
+        </div>
+    </div>
+    <div id="about_content" class="info_content">
+        <p class="section_title">About</p>
+        <p class="section_content">{{ about }}</p>
+    </div>
+    <div id="skills_content" class="info_content">
+        <p class="section_title">Skills</p>
+        {% with content_width=50 n_areas=skills|length%}
+        <div class="section_content" id="skills_content_container">
+            {% for area in skills %}
+                <div class="skill-area">
+                    {% for skill in area %}
+                    <div class="skill">
+                        <svg class="skill-svg" height="10em" width="10em" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <g class="skill-circle-text-container">
+                                <!--<circle stroke="black" fill="white" stroke-width="0.1em" r="3.5em" cx="50%" cy="50%"></circle>-->
+                                <circle class="skill-circle" stroke="black" stroke-width="1em" fill="transparent" r="4em" cx="50%" cy="50%" percentage="{{ skill.1 }}"></circle>
+                                <text class="skill-text" x="50%" y="50%" text-anchor="middle">
+                                    <tspan x="50%" dy="0%">{{ skill.0 }}</tspan>
+                                    <tspan x="50%" dy="12%">{{ skill.1 }}%</tspan>
+                                </text>
+                            </g>
+                        </svg>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        {% endwith %}
+    </div>
+    <div id="links_content" class="info_content">
+        <p class="section_title">Links</p>
+        <ul class="section_content">
+            <li class="links_text_wrapper"><a class="links_text" href="mailto:{{ email.1 }}">{{ email.0 }}</a></li>
+            {% for link in links%}
+                <li class="links_text_wrapper"><a class="links_text" href="{{ link.1 }}">{{ link.0 }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock content %}

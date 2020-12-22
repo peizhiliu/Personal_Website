@@ -1,0 +1,59 @@
+{% extends "base.html"%}
+{% load static %}
+{% load project_extras %}
+
+{% block title %}
+<title>Peizhi Liu Projects</title>
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'projects/css/index.css' %}">
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'projects/js/index.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div id="content-container">
+    {% for project in projects %}
+        <div class="project-container" id="project-{{forloop.counter}}">
+            <div class="info-container">
+                <div class="project-title-container">
+                    <a class="project-title" href="{{ project.url }}">
+                        {{ project.title }}
+                    </a>
+                    <p class="last-update">
+                        Last update: {{ project.lastupdate|get_date }}
+                    </p>
+                </div>
+                <div class="technologies">
+                    {% for tech in project.technology.all %}
+                    <p class="technology" style="background-color: #{{tech.color}};">
+                        {{ tech.name }}
+                    </p>
+                    {% endfor %}
+                </div>
+                <p class="project-description">
+                    {{ project.description }}
+                </p>
+            </div>
+            <div class="image-container">
+                {% if project.image_set.all|length == 1 %}
+                    <div class="slides image-1">
+                        <img src="{{project.image_set.all.0.image.url}}", alt="Project Image">
+                    </div>
+                {% elif project.image_set.all|length > 1 %}
+                    <a class="prev" onclick="advance_slide({{ forloop.counter }}, -1)">&#10094</a>
+                    {% for image in project.image_set.all %}
+                        <div class="slides image-{{ forloop.counter }} fade" style="display: none;">
+                            <img src="{{image.image.url}}", alt="Project Image">
+                        </div>
+                    {% endfor %}
+                    <a class="next" onclick="advance_slide({{ forloop.counter }}, 1)">&#10095</a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

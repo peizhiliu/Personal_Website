@@ -1,0 +1,10 @@
+#content-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#coming-soon{
+    display: block;
+    padding: 3em;
+}

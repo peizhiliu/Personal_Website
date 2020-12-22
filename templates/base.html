@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        {% block title %}{% endblock %}
+        <meta name="author" content="Peizhi Liu">
+        <link rel="stylesheet" href="{% static 'base.css' %}">
+        {% block styles %}{% endblock %}
+        <script type="text/javascript" src="{% static 'jquery.js' %}"></script> 
+        <script type="text/javascript" src="{% static 'base.js' %}"></script>
+        {% block scripts %}{% endblock %}
+    </head>
+
+    <body>
+        <div id="nav-bar-container">
+            <div id="nav-bar">
+                <div id="nav-logo">
+                    <a id="nav-logo-text" href="{% url 'about' %}">Peizhi Liu</a>
+                </div>
+                <div id="nav-links">
+                    <ul id="nav-links-list">
+                        <li class="nav-links-item">
+                            <a class="nav-links-text" href="{% url 'about' %}">About</a>
+                        </li>
+                        <li class="nav-links-item">
+                            <a class="nav-links-text" href="{% url 'projects' %}">Projects</a>
+                        </li>
+                        <li class="nav-links-item">
+                            <a class="nav-links-text" href="{% url 'blog' %}">Blog</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="content">
+            {% block content %}
+            {% endblock content %}
+        </div>
+        <div id="footer">
+            <a id="copyright-text" href="{% url 'about' %}">Made by Peizhi Liu</a>
+        </div>
+    </body>
+
+</html>
