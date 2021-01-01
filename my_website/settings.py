@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'about',
     'projects',
-    'blog'
+    'blog',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +138,28 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Github Token 
 GIT_TOKEN = config("GIT_TOKEN")
+
+# CKEditor directory
+CKEDITOR_UPLOAD_PATH = 'blog/uploads/'
+
+# CKEditor configs
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            [ 'Source', '-', 'Save', 'NewPage', 'ExportPdf', 'Preview', 'Print', '-', 'Templates' ],
+            [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],
+            [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ],
+            '/',
+            [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat' ],
+            [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ],
+            [ 'Link', 'Unlink', 'Anchor' ],
+            [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ],
+            '/',
+            [ 'Styles', 'Format', 'Font', 'FontSize' ],
+            [ 'TextColor', 'BGColor' ],
+            [ 'Maximize', 'ShowBlocks' ],
+            [ 'About' ]
+        ]
+    }
+}

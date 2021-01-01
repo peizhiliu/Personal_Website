@@ -1,0 +1,26 @@
+{% extends "base.html"%}
+{% load static %}
+{% load project_extras %}
+
+{% block title %}
+<title>Peizhi Liu Blog</title>
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'blog/css/edit.css' %}">
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'blog/js/edit.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div id="content-container">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }}
+        <input type="submit" value="Post">
+    </form>
+</div>
+{% endblock %}

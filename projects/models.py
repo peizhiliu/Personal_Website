@@ -20,7 +20,7 @@ class Project(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     technology = models.ManyToManyField(Technology)
-    lastupdate = models.DateTimeField(default=timezone.now())
+    lastupdate = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return '{}\'s project: {}'.format(self.user, self.title)
