@@ -31,6 +31,20 @@
     width: 100%;
 }
 
+.post-title-date{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#post-date{
+    margin: 0%;
+    font-size: 0.9rem;
+    color: gray;
+}
+
 #post-title{
     margin: 0;
     margin-right: 1rem;
