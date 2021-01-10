@@ -1,0 +1,46 @@
+{% if comment %}
+    <div class="comment-head">
+        <p class="comment-name">
+            {{ comment.author }}
+        </p>
+        <p class="comment-time">
+            {{ comment.date|timesince }} ago
+        </p>
+    </div>
+    <p class="comment-content">
+        {{ comment.body }}
+    </p>
+    <button class="reply-button" onclick="toggle_reply(this)">Reply</button>
+    <div class="form-container" style="visibility: hidden; display: none;">
+        <form method="POST" id="comment-form">
+            {% csrf_token %}
+            <div class="errors">
+                {{ form.non_field_errors }}
+            </div>
+            <div class="field-container" id="author-container">
+                {{ form.author.label_tag }}
+                {{ form.author|add_class:'text-input-field' }}
+                {{ form.author.errors }}
+            </div>
+            <div class="field-container" id="email-container">
+                {{ form.email.label_tag }}
+                {{ form.email|add_class:'email-field' }}
+                {{ form.email.errors }}
+            </div>
+            <div class="field-container" id="body-container">
+                {{ form.body.label_tag }}
+                {{ form.body|add_class:'text-area-field' }}
+                {{ form.body.errors }}
+            </div>
+            <div class="field-container" id="submit-container">
+                <input type="hidden" name="parent_pk" value="{{ comment.pk }}">
+                <input id="submit-button" type="submit" value="Comment">
+            </div>
+        </form>
+    </div>
+    {% for comment in comment.replies.all%}
+        <div class="reply">
+            {% include "blog/post_comments.html" with comment=comment %}
+        </div>
+    {% endfor %}
+{% endif %}

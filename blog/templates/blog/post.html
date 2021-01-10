@@ -1,0 +1,83 @@
+{% extends "base.html"%}
+{% load static %}
+{% load project_extras %}
+{% load blog_extras %}
+
+{% block title %}
+<title>Peizhi Liu Blog</title>
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'blog/css/post.css' %}">
+<link rel="stylesheet" href="{% static 'blog/css/shared.css' %}">
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'blog/js/post.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div id="content-container">
+    <div id="post-section">
+        <div id="post-head">
+            {% if request.user.is_superuser %}
+                <a class="create-edit-button" href="{% url 'edit' post.pk post.slug %}"> Edit </a>
+            {% endif %}
+            <p id="post-title">
+                {{ post.title }}
+            </p>
+            <div id="post-descripts">
+                <p id="post-update">
+                    {{ post.date|get_date }}
+                </p>
+                {% for tag in post.tags.all|sort_lower:"name" %}
+                    <a class="post-tag" href="{% url 'tag' tag.name %}">
+                        {{ tag.name }}
+                    </a>
+                {% endfor %}
+            </div>
+            
+        </div>
+        
+        <div id="post-body">
+            {{ post.body|safe }}
+        </div>
+    </div>
+    <div id="comments-section">
+        <p id="comment-title">Comments</p>
+        <div id="comments-content">
+            {% for comment in comments %}
+                <div class="comment">
+                    {% include "blog/post_comments.html" with comment=comment form=form %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div id="form-container">
+        <form method="POST" id="comment-form">
+            {% csrf_token %}
+            <div class="errors">
+                {{ form.non_field_errors }}
+            </div>
+            <div class="field-container" id="author-container">
+                {{ form.author.label_tag }}
+                {{ form.author|add_class:'text-input-field' }}
+                {{ form.author.errors }}
+            </div>
+            <div class="field-container" id="email-container">
+                {{ form.email.label_tag }}
+                {{ form.email|add_class:'email-field' }}
+                {{ form.email.errors }}
+            </div>
+            <div class="field-container" id="body-container">
+                {{ form.body.label_tag }}
+                {{ form.body|add_class:'text-area-field' }}
+                {{ form.body.errors }}
+            </div>
+            <div class="field-container" id="submit-container">
+                <input id="submit-button" type="submit" value="Comment">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

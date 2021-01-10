@@ -160,6 +160,7 @@ CKEDITOR_CONFIGS = {
             [ 'TextColor', 'BGColor' ],
             [ 'Maximize', 'ShowBlocks' ],
             [ 'About' ]
-        ]
+        ],
+        'width': 'auto',
     }
 }

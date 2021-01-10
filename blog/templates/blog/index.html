@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block styles %}
+<link rel="stylesheet" href="{% static 'blog/css/shared.css' %}">
 <link rel="stylesheet" href="{% static 'blog/css/index.css' %}">
 {% endblock %}
 
@@ -16,6 +17,73 @@
 
 {% block content %}
 <div id="content-container">
-    <h1 id="coming-soon">Blog coming soon!</h1>
+    <div id="head">
+        <div class="filter-container">
+            <a class="filter-button" onclick="toggle_filter()">
+                Tags
+            </a>
+            <ul class="tags-list" style="display: none;">
+                <li class="tag-item">
+                    <a class="tag-link" href="{% url 'blog' %}">
+                        All
+                    </a>
+                </li>
+                {% for tag in tags %}
+                <li class="tag-item">
+                    <a class="tag-link" href="{% url 'tag' tag.name %}">
+                        {{ tag.name }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% if request.user.is_superuser %}
+            <a class="create-edit-button" href="{% url 'create' %}"> New Post </a>
+        {% endif %}
+    </div>
+    <div id="posts">
+        {% for post in page %}
+            <div class="post-container">
+                <div class="post-head">
+                    <div class="post-title-date">
+                        <a class="post-title" href="{% url 'post' post.pk post.slug %}"> {{ post.title }}</a>
+                        <p class="post-date"> {{ post.date|get_date }} </p>
+                    </div>
+                    <div class="post-tags">
+                        {% for tag in post.tags.all|sort_lower:"name" %}
+                        <a class="post-tag" href="{% url 'tag' tag.name %}">
+                            {{ tag.name }}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="post-description">
+                    {% with post_image=post|get_post_image:"post-image"%}
+                        {% if post_image%}
+                            {{ post_image|safe }}
+                        {% endif %}
+                    {% endwith %}
+                    {{ post|get_post_body:"post-text 200"|safe }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div id="pagination">
+        <span class="step-links">
+            {% if page.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ page.number }} of {{ page.paginator.num_pages }}
+            </span>
+    
+            {% if page.has_next %}
+                <a href="?page={{ page.next_page_number }}">next</a>
+                <a href="?page={{ page.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 </div>
 {% endblock %}

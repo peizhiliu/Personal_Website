@@ -25,15 +25,17 @@ class Post(models.Model):
         self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
 
-
     def __str__(self):
         return "Post: {}, date={}, public={}".format(self.title, self.date, self.public)
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name='comments', max_length=10000, on_delete=models.CASCADE)
     author = models.CharField(max_length=100)
+    email = models.EmailField()
+    ip = models.GenericIPAddressField()
     body = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
+    parent = models.ForeignKey('self', null=True, related_name='replies', blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return "Comment: author={}, post={}".format(self.author, self.post.title)

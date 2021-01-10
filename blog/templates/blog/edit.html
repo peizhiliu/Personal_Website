@@ -1,6 +1,6 @@
 {% extends "base.html"%}
 {% load static %}
-{% load project_extras %}
+{% load blog_extras %}
 
 {% block title %}
 <title>Peizhi Liu Blog</title>
@@ -8,6 +8,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'blog/css/edit.css' %}">
+<link rel="stylesheet" href="{% static 'blog/css/shared.css' %}">
 {% endblock %}
 
 {% block scripts %}
@@ -16,11 +17,40 @@
 
 {% block content %}
 <div id="content-container">
-    <form method="post">
-        {% csrf_token %}
-        {{ form.media }}
-        {{ form.as_p }}
-        <input type="submit" value="Post">
-    </form>
+    <div id="form-title-container">
+        <p id="form-title">{{ title }}</p>
+    </div>
+    <div id="form-container">
+        <form method="POST" id="post-edit-form">
+            {% csrf_token %}
+            <div class="errors">
+                {{ form.non_field_errors }}
+            </div>
+            {{ form.media }}
+            <div class="field-container" id="title-container">
+                {{ form.title.label_tag }}
+                {{ form.title|add_class:'text-input-field' }}
+                {{ form.title.errors }}
+            </div>
+            <div class="field-container" id="body-container">
+                {{ form.body.label_tag }}
+                {{ form.body|add_class:'ckeditor-field' }}
+                {{ form.body.errors }}
+            </div>
+            <div class="field-container" id="tags-container">
+                {{ form.tags.label_tag }}
+                {{ form.tags|add_class:'model-multi-field' }}
+                {{ form.tags.errors }}
+            </div>
+            <div class="field-container" id="public-container">
+                {{ form.public.label_tag }}
+                {{ form.public|add_class:'boolean-field' }}
+                {{ form.public.errors }}
+            </div>
+            <div class="field-container" id="submit-container">
+                <input id="submit-button" type="submit" value="Post">
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}

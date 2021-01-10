@@ -1,6 +1,7 @@
 from django import forms
 from .models import Tag, Post, Comment
 from django.utils.translation import ugettext as _
+from ckeditor_uploader.fields import RichTextUploadingFormField
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -10,7 +11,7 @@ class PostForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['author', 'body']
+        fields = ['author', 'email', 'body']
         labels = {
             'author': 'Name',
             'body': 'Comment'

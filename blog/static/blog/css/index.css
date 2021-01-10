@@ -1,10 +1,213 @@
+#content{
+    display: flex;
+    justify-content: center;
+}
+
 #content-container{
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    max-width: 60rem;
+    margin-right: 2rem;
+    margin-left: 2rem;
 }
 
 #coming-soon{
     display: block;
     padding: 3em;
+}
+
+#posts{
+    flex-grow: 1;
+    width: 100%;
+}
+
+#head{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    height: fit-content;
+    justify-content: space-between;
+}
+
+#head a{
+    display: inline-block;
+}
+
+.filter-container{
+    position: relative;
+}
+
+.tags-list{
+    z-index: 3;
+    margin: 0%;
+    padding: 0%;
+    padding-top: 0.5rem;
+    padding-bottom: 0.6rem;
+    border-radius: 0.3rem;
+    border: solid lightgray 1px;
+    position: absolute;
+    background-color: white;
+    max-height: 15rem;
+    min-width: 10rem;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.tag-item{
+    list-style-type: none;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    transition: ease-in-out background-color 0.1s;
+}
+
+.tag-item:hover{
+    background-color: lightgray;
+}
+
+.tag-link{
+    height: 100%;
+    width: 100%;
+}
+
+.filter-button{
+    color: white !important;
+    font-size: 1rem;
+    background-color: #408bfc;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border-radius: 0.2rem;
+
+    transition: ease-in-out box-shadow .2s;
+}
+
+.filter-button:hover{
+    cursor: pointer;
+}
+
+.filter-button:active{
+    box-shadow: 0px 0px 0px 3px #b1d0ff;
+}
+
+
+.step-links{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.step-links a{
+    margin-left: 0.7rem;
+    margin-right: 0.7rem;
+    transition: ease-in-out text-shadow 0.1s;
+}
+
+.step-links a:hover{
+    text-shadow: 0 0.015em #101010,0 -0.015em #101010,0.01em 0 #101010,-0.01em 0 #101010;
+}
+
+.step-links a{
+    display: inline-block;
+}
+
+.current{
+    margin-right: 0.7rem;
+    margin-left: 0.7rem;
+}
+
+.post-container{
+    display: flex;
+    flex-direction: column;
+    height: 22rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: all .2s ease-in-out;
+}
+
+.post-container:hover{
+    transform: scale(1.01);
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+}
+
+.post-head{
+    display: flex;
+    flex-direction: column;
+    height: 25%;
+}
+
+.post-title{
+    font-size: 1.5rem;
+    transition: ease-in-out text-shadow 0.1s;
+}
+
+.post-title:hover{
+    text-shadow: 0 0.015em #101010,0 -0.015em #101010,0.01em 0 #101010,-0.01em 0 #101010;
+}
+
+.post-date{
+    color: gray;
+    margin: 0%;
+}
+
+.post-title-date{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.post-tags{
+    margin-top: 0.8rem;
+}
+
+.post-tag{
+    margin: 0%;
+    margin-right: 0.7rem;
+}
+
+.post-description{
+    display: flex;
+    flex-direction: row;
+    height: 75%;
+}
+
+.post-image{
+    height: 100%;
+    width: 25%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.post-image img{
+    height: 100%;
+}
+
+.post-text{
+    width: 75%;
+    height: 90%;
+    margin-left: 1em;
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+}
+
+.post-text p{
+    font-size: 1rem;
+    margin: 0%;
+    text-overflow: ellipsis;
+    height: 100%;
+    overflow: hidden;
+    line-height: 1.5em;
+    color: #757575;
 }

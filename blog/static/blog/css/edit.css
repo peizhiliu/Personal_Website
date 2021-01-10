@@ -1,0 +1,38 @@
+#content-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+}
+
+#form-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#form-title-container{
+    text-align: center;
+}
+
+#form-title{
+    font-size: 1.3em;
+}
+
+#post-edit-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#public-container{
+    flex-direction: row-reverse;
+    justify-content:flex-end;
+}
+
+#public-container label{
+    padding-left: 0.2em;
+    margin: 0;
+}
+
